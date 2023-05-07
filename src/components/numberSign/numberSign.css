@@ -1,0 +1,8 @@
+.NumberSign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    transition: all 0.1 ease-in;
+    padding: 20px;
+}
