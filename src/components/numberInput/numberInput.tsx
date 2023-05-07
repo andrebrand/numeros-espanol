@@ -32,7 +32,7 @@ function NumberInput({onResultSubmit}:Props){
             </div>
             <div className="NumPad">
                 {
-                    [...Array(9)].map((e, i) => <button key={i} className="btn btn-secondary" onClick={()=>updateResult(i+1)}>{i+1}</button>)
+                    [...Array(9)].map(({index: i}) => <button key={i} className="btn btn-secondary" onClick={()=>updateResult(i+1)}>{i+1}</button>)
                 }
                 <span></span>
                 <button className="btn btn-secondary" onClick={()=>updateResult(0)}>0</button>
