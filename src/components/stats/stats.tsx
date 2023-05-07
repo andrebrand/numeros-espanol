@@ -1,6 +1,3 @@
-
-import './stats.css'
-
 interface Props{
     stats: {right: number, wrong: number};
 }
