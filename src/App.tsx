@@ -61,6 +61,7 @@ function App() {
 
   const handleStartGame = () => {
     setTimer(timeLimit);
+    setStats({right: 0, wrong: 0});
     setNumber(getRandomNumber(0, maxNumber));
   }
 
