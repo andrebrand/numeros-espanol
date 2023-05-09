@@ -6,7 +6,7 @@ interface Props{
 }
 
 function Timer({onTimerEnd} : Props){
-    const timeLimit = 3;
+    const timeLimit = 100;
 
     const [timer, setTimer] = useState(timeLimit);
 
