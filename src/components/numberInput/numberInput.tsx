@@ -44,7 +44,7 @@ function NumberInput({onResultSubmit}:Props){
         <div className="NumerWrapper">
             <div className="input-group">
                 <input className="form-control" value={result}  onChange={handleChange} onKeyDown={handleKeyPress} />
-                <button className="btn btn-lg btn-primary SubmitButton" onClick={()=>setResult('')}>🞩</button>
+                <button className="btn btn-lg btn-primary" onClick={()=>setResult('')}>✕</button>
             </div>
             <div className="NumPad">
                 { createButtons(3, 6) }
