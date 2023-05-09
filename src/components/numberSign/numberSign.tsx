@@ -9,8 +9,12 @@ interface Props {
 }
   
 
+
 function NumberSign({number, color}: Props){
-    return( <div className={`card border-${color} text-${color} NumberSign`}><h1>{getNameofNumber(number)}</h1></div> );
+    const getColorClasses = () => {
+        return !!color ? `border-${color} text-${color}` : '';
+    }
+    return( <div className={`card ${getColorClasses()} NumberSign`}>{getNameofNumber(number)}</div> );
 }
 
 export default NumberSign

@@ -62,7 +62,7 @@ function App() {
     if(stats.right > 0 || stats.wrong > 0){
       return <Stats stats={stats} />
     }else{
-      return <h1>¡Hola! Aprender los numeros en español.</h1>
+      return <h1 className='p-3 text-center'>¡Hola! Aprender los numeros en español.</h1>
     }
   }
 
