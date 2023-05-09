@@ -9,9 +9,6 @@ import Stats from './components/stats/stats';
 import Timer from './components/timer/timer';
 
 
-
-
-
 function App() {
   const maxNumber = 100;
 
@@ -61,13 +58,19 @@ function App() {
     setGameState(false);
   }
 
+  const showStats = () => {
+    if(stats.right > 0 || stats.wrong > 0){
+      return <Stats stats={stats} />
+    }else{
+      return <h1>¡Hola! Aprender los numeros en español.</h1>
+    }
+  }
+
   return (
     <div className="App">
       { !gameState
         ? <>
-            { (stats.right > 0 || stats.wrong > 0) && 
-              <Stats stats={stats} />
-            }
+            { showStats() }
             <button className="btn btn-lg btn-primary" onClick={handleStartGame}>comenzar</button>
           </>
         : <>
