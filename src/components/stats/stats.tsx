@@ -5,11 +5,11 @@ interface Props{
 function Stats({stats} : Props){
     return (
         <div className="card Stats">
-              <div className="card-header">Stats</div>
+              <div className="card-header">Estadísticas</div>
               <div className="card-body">
-                Richtig: { stats.right }
+                Correcto: { stats.right }
                 <br />
-                Falsch: { stats.wrong }
+                Incorrecto: { stats.wrong }
               </div>
         </div>
     );

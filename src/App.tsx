@@ -1,88 +1,80 @@
 import './App.css'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { getRandomNumber } from './utils/numberUtils'
 
 import NumberSign from './components/numberSign/numberSign'
 import NumberInput from './components/numberInput/numberInput'
 import Stats from './components/stats/stats';
+import Timer from './components/timer/timer';
 
 
 
 
 
 function App() {
-  const timeLimit = 100;
   const maxNumber = 100;
-  const colors:Array<''|'success'|'danger'> = ['', 'success', 'danger'];
 
+  const colors:Array<''|'success'|'danger'> = ['', 'success', 'danger'];
   
   const [number, setNumber] = useState(54);
-
-  const [timer, setTimer] = useState(0);
 
   const [gues, setGues] = useState(0); // 0 = default | 1 = success | 2 = false
 
   const [stats, setStats] = useState({right: 0, wrong: 0});
 
+  const [gameState, setGameState] = useState(false); // false = not running | true = running
 
-
-  useEffect(() => {
-      const intervalId = setInterval(() => {
-        if(timer > 0){
-          setTimer((preValue)=>{return --preValue });
-          if(gues == 1){
-            setNumber(getRandomNumber(0, maxNumber));
-          }
-          if(gues !== 0){
-            setGues(0);
-          }
-        }
-      }, 1000);
-    return () => clearInterval(intervalId);
-  },[timer]);
-
-
-  const handleSelectItem = (result: number) => {
+  const handleSubmitResult = (result: number) => {
     if(result === number){
       setGues(1);
       setStats((preStats)=>{
-        ++preStats.right
-        return preStats;
+        return {right: preStats.right++, wrong: preStats.wrong};
       });
+      clearGues(true);
     }else{
       setGues(2);
       setStats((preStats)=>{
-        ++preStats.wrong
-        return preStats;
+        return {right: preStats.right, wrong: preStats.wrong++};
       });
+      clearGues(false);
     }
   }
 
+  const clearGues = (setNewNumber: boolean) =>{
+    const timeoutId = setTimeout(() => {
+      if(setNewNumber){
+        setNumber(getRandomNumber(0, maxNumber));
+      }
+      setGues(0);
+      clearTimeout(timeoutId);
+    }, 500);
+  }
+
   const handleStartGame = () => {
-    setTimer(timeLimit);
+    setGameState(true);
     setStats({right: 0, wrong: 0});
     setNumber(getRandomNumber(0, maxNumber));
   }
 
-
+  const handleEndGame = () => {
+    setGameState(false);
+  }
 
   return (
     <div className="App">
-      
-      
-      { timer <= 0 
+      { !gameState
         ? <>
             { (stats.right > 0 || stats.wrong > 0) && 
               <Stats stats={stats} />
             }
-            <button className="btn btn-primary" onClick={handleStartGame}>comenzar</button>
+            <button className="btn btn-lg btn-primary" onClick={handleStartGame}>comenzar</button>
           </>
         : <>
-            <h1>{timer}</h1>
+            <Timer onTimerEnd={handleEndGame} />
             <div className="Game">
               <NumberSign number={number} color={ colors[gues] } />
-              <NumberInput onResultSubmit={handleSelectItem}  />
+              <NumberInput onResultSubmit={handleSubmitResult}  />
             </div>
           </>
       }

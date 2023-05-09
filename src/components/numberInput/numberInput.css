@@ -3,6 +3,13 @@
     flex-direction: column;
 }
 
+.right{
+    order: -1;
+}
+.left{
+    order: 1;
+}
+
 .NumPad{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
