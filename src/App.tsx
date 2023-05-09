@@ -26,13 +26,13 @@ function App() {
     if(result === number){
       setGues(1);
       setStats((preStats)=>{
-        return {right: preStats.right++, wrong: preStats.wrong};
+        return {right: preStats.right + 1, wrong: preStats.wrong};
       });
       clearGues(true);
     }else{
       setGues(2);
       setStats((preStats)=>{
-        return {right: preStats.right, wrong: preStats.wrong++};
+        return {right: preStats.right, wrong: preStats.wrong + 1};
       });
       clearGues(false);
     }
